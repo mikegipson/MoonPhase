@@ -1,6 +1,3 @@
-let dayX = 0;
-let dayZ = 0;
-
 
 function setup(){
   createCanvas(1000,1000,WEBGL);
@@ -9,23 +6,19 @@ function setup(){
 function draw() {
   //ambientLight(255);
   background(0);
-  noCursor();
-  noStroke();
-  
-  console.log(mouseX+" "+mouseY);
-
-  let phase = frameCount%30;
-  
-  let dayX = sin(radians(frameCount));
-  let dayZ = cos(radians(frameCount));
-  moon(dayX,dayZ);
+  let dayCount = (frameCount/30%30);
+  console.log(dayCount);
+  moon(dayCount);
   
 }
 
 
 function moon(phase){
-  stroke(0);
+  noStroke();
+  noCursor();
   ambientMaterial(200,200,200);
+  let dayX = sin(radians(map(phase,1,30,0,360)));
+  let dayZ = cos(radians(map(phase,1,30,0,360)));
   directionalLight(255,255,255,dayX,0,dayZ);
   sphere(200,75,75);
 }
